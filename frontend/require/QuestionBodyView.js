@@ -17,7 +17,14 @@ define(['underscore', 'backbone', 'mustache', 'spinController', 'TestFactory', '
             var qid = this.model.get("qid");
 
             var testClient = TestFactory.getClass(this.test.get("type"), "client");
-            var qTitle = this.model.get("title");
+
+            var qTitle;
+            if (this.test.isExam() && this.model.has("examTitle")) {
+                qTitle = this.model.get("examTitle");
+            } else {
+                qTitle = this.model.get("title");
+            }
+
             var qNumber = testClient.formatQNumber(qid, this.test, this.tInstance);
             var title;
             if (this.model.get("showTitle")) {

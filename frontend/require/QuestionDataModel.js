@@ -11,6 +11,7 @@ define(['underscore', 'backbone', 'jquery', 'async'], function(_, Backbone, $, a
                 vid: options.vid, // may be undefined
                 qiid: null,
                 title: null,
+                examTitle: null,
                 number: null,
                 video: null,
                 qClient: null,
@@ -44,6 +45,7 @@ define(['underscore', 'backbone', 'jquery', 'async'], function(_, Backbone, $, a
             $.getJSON(that.appModel.apiURL("questions/" + qid), function(data) {
                 that.set({
                     "title": data.title,
+                    "examTitle": data.examTitle,
                     "number": data.number,
                     "video": data.video
                 });

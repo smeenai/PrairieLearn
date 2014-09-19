@@ -567,7 +567,7 @@ if (config.deployMode === 'edu.cs') {
 
 app.get("/questions", function(req, res) {
     async.map(_.values(questionDB), function(item, callback) {
-        callback(null, {qid: item.qid, title: item.title, number: item.number});
+        callback(null, {qid: item.qid, title: item.title, examTitle: item.examTitle, number: item.number, video: item.video});
     }, function(err, results) {
         res.json(stripPrivateFields(results));
     });
@@ -577,7 +577,7 @@ app.get("/questions/:qid", function(req, res) {
     var info = questionDB[req.params.qid];
     if (info === undefined)
         return sendError(res, 404, "No such question: " + req.params.qid);
-    res.json(stripPrivateFields({qid: info.qid, title: info.title, number: info.number, video: info.video}));
+    res.json(stripPrivateFields({qid: info.qid, title: info.title, examTitle: info.examTitle, number: info.number, video: info.video}));
 });
 
 var questionFilePath = function(qid, filename, callback, nTemplates) {
