@@ -48,7 +48,7 @@ define(["underscore", "backbone", "mustache", "ExamTestHelper", "text!ExamTestIn
                     qid: q.get("qid"),
                     tid: that.model.get("tid"),
                     tiid: that.model.get("tiid"),
-                    title: q.get("title"),
+                    title: q.has("examTitle") ? q.get("examTitle") : q.get("title"),
                     number: index + 1,
                 };
                 if (data.open) {
