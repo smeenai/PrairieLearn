@@ -55,7 +55,7 @@ define(["underscore", "moment-timezone", "PrairieRandom"], function(_, moment, P
             throw Error("Test is not open");
 
         tInstance.submissionsByQid[submission.qid] = submission;
-        submission._private = ["score", "trueAnswer", "oldTInstance", "oldTest", "newTInstance", "newTest"];
+        submission._private = ["score", "trueAnswer", "feedback", "oldTInstance", "oldTest", "newTInstance", "newTest"];
     };
 
     ExamTestServer.finish = function(tInstance, test) {
