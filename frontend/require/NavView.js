@@ -24,6 +24,7 @@ define(['underscore', 'backbone', 'Mustache', 'text!NavView.html'], function(_, 
             data.changeUserPerm = this.model.hasPermission("changeUser");
             data.currentAssessmentName = this.model.get("currentAssessmentName");
             data.currentAssessmentLink = this.model.get("currentAssessmentLink");
+            data.examMode = this.model.get("examMode");
 
             data.navHomeAttributes = '';
             data.navAssessAttributes = '';

@@ -10,9 +10,11 @@
   </div>
   <div class="collapse navbar-collapse">
     <ul class="nav navbar-nav" id="main-nav">
+      {{^examMode}}
       <li {{{navHomeAttributes}}}><a href="index.html#">Home</a></li>
       <li {{{navAboutAttributes}}}><a href="index.html#about">About</a></li>
       <li {{{navStatsAttributes}}}><a href="index.html#stats">Statistics</a></li>
+      {{/examMode}}
       <li {{{navAssessAttributes}}}><a href="index.html#assess">Assessments</a></li>
       {{#currentAssessmentName}}
       <li {{{currentAssessmentAttributes}}}><a href="{{{currentAssessmentLink}}}">{{currentAssessmentName}}</a></li>

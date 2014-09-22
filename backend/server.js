@@ -25,6 +25,8 @@ config.nodetimeAccountKey = 'SECRET_NODETIME_KEY'; // override in config.json
 config.skipUIDs = {};
 config.superusers = {"user1@illinois.edu": true};
 
+config.examMode = false;
+
 if (fs.existsSync('config.json')) {
     try {
         fileConfig = JSON.parse(fs.readFileSync('config.json', {encoding: 'utf8'}));
@@ -1403,6 +1405,10 @@ app.get("/stats/usersPerHour", function(req, res) {
         }
         res.json(stripPrivateFields(obj));
     });
+});
+
+app.get("/config", function(req, res) {
+    res.json({ "examMode": config.examMode });
 });
 
 if (config.deployMode !== 'engr') {

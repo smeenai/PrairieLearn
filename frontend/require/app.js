@@ -88,6 +88,7 @@ function(  $,        jqueryCookie,    _,            Backbone,   bootstrap,   Mus
                 currentAssessmentLink: null,
                 pageOptions: {},
                 deployMode: false,
+                examMode: false,
                 apiServer: "http://localhost:3000",
                 authUID: null,
                 authName: null,
@@ -136,6 +137,18 @@ function(  $,        jqueryCookie,    _,            Backbone,   bootstrap,   Mus
                     that.set("authPerms", userData.perms);
                 });
             });
+
+            var configURL = this.apiURL("config");
+            $.ajax(configURL, {
+                dataType: "json",
+                async: false,
+                success: function(config) {
+                    that.set({
+                        examMode: config.examMode,
+                    });
+                },
+            });
+
             this.listenTo(Backbone, "tryAgain", this.tryAgain);
         },
 
@@ -297,11 +310,11 @@ function(  $,        jqueryCookie,    _,            Backbone,   bootstrap,   Mus
             "cq/:tiid/:qInfo(/not/:skipQNumbers)": "goChooseTestQuestion",
             "ti/:tiid": "goTestInstance",
             "about": "goAbout",
-            "*actions": "goHome"
         },
 
         initialize: function(options) {
             this.model = options.model;
+            this.route("*actions", this.model.get("examMode") ? "goAssess" : "goHome");
         },
 
         goHome: function(actions) {
@@ -396,5 +409,10 @@ function(  $,        jqueryCookie,    _,            Backbone,   bootstrap,   Mus
                 }});
             }});
         });
+
+        // TODO: figure out better way to do this, now that AppModel initialize is synchronous
+        if (appModel.has("authUID")) {
+            appModel.trigger("change:authUID");
+        }
     });
 });
