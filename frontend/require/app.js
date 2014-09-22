@@ -310,16 +310,16 @@ function(  $,        jqueryCookie,    _,            Backbone,   bootstrap,   Mus
             "cq/:tiid/:qInfo(/not/:skipQNumbers)": "goChooseTestQuestion",
             "ti/:tiid": "goTestInstance",
             "about": "goAbout",
+            "*actions": "goHome"
         },
 
         initialize: function(options) {
             this.model = options.model;
-            this.route("*actions", this.model.get("examMode") ? "goAssess" : "goHome");
         },
 
         goHome: function(actions) {
             this.model.set({
-                "page": "home",
+                "page": this.model.get("examMode") ? "assess" : "home",
                 "pageOptions": {}
             });
         },
